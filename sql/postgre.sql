@@ -15,7 +15,7 @@ CREATE TABLE Users (
 	credit_card_no	VARCHAR			NOT NULL, 
 	unit_no			VARCHAR			CHECK (unit_no LIKE ('__-%') OR NULL), 
 	postal_code		VARCHAR			NOT NULL, 
-	avatar			BYTEA			NOT NULL, 
+	avatar			BYTEA			NOT NULL NOT NULL, 
 	reg_date		DATE			NOT NULL DEFAULT CURRENT_DATE, 
 	is_owner		BOOLEAN			NOT NULL DEFAULT FALSE, 
 	is_caretaker	BOOLEAN			NOT NULL DEFAULT FALSE
@@ -27,9 +27,9 @@ CREATE TABLE Owners (
 );
 
 CREATE TABLE Caretakers (
-	username			   VARCHAR			  PRIMARY KEY REFERENCES Users(username) ON DELETE CASCADE,
+	username			   VARCHAR		PRIMARY KEY REFERENCES Users(username) ON DELETE CASCADE,
 	is_full_time		BOOLEAN			NOT NULL,
-	avg_rating			FLOAT			   NOT NULL DEFAULT 0,
+	avg_rating			FLOAT			NOT NULL DEFAULT 0,
 	no_of_reviews		INT				NOT NULL DEFAULT 0,
 	no_of_pets_taken	INT				CHECK (no_of_pets_taken >= 0) DEFAULT 0
 );
@@ -42,7 +42,7 @@ CREATE TABLE ownsPets (
 	size			VARCHAR 		NOT NULL CHECK (size IN ('Extra Small', 'Small', 'Medium', 'Large', 'Extra Large')), 
 	sociability		TEXT, 
 	special_req		TEXT, 
-	img				BYTEA, 
+	img				BYTEA			NOT NULL, 
 	PRIMARY KEY (username, name)
 );
 

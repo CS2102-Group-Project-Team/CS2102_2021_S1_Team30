@@ -832,6 +832,19 @@ function viewbids (req, res, next) {
 	});
 }
 
+function ctview_bids (req, res, next) {
+	var bids;
+	console.log(req.body.username);
+	pool.query(sql_query.query.ctview_bids, [req.user.username], (err, data) => {
+		if (err || !data.rows || data.rows.length == 0) {
+			bids = [];
+		} else {
+			bids = data.rows;
+		}
+		basic(req, res, 'ctreviews', {bids: bids, auth : true});
+	});
+}
+
 function rate_review_form (req, res, next) {
 	console.log("lol");
 	res.render('rate_review_form', {auth:true});
@@ -946,45 +959,5 @@ function logout(req, res, next) {
 }
 
 module.exports = initRouter;
-
-
-
-
-
-
-
-/*function search_nearby (req, res, next) {
-	var username = req.user.username;
-	var filter;
-	var nearby;
-	console.log(username);
-
-	pool.query(sql_query.query.get_area, [username], (err, data) => {
-		if(err || !data.rows || data.rows.length == 0) {
-			filter = [];
-			console.error("postal code not found");
-			res.redirect("/display");
-		} else {
-			filter = data.rows[0].postal_code
-			pool.query(sql_query.query.find_nearby, [username, filter[0, 2] + "____"], (err, data) => {
-				if(err) {
-					console.error("Error in deleting account", err);
-					res.redirect("/display?found=pass")
-				} else if (!data.rows || data.rows.length == 0){
-					console.info("No nearby caretaker found");
-					nearby = []
-
-					basic(req, res, 'display', { category : category, search_msg: msg(req, 'search', 'No nearby caretaker found', 'Error in searching caretaker'), auth: true });
-				} else {
-					console.log("Caretaker found");
-					nearby = data.rows
-					basic(req, res, 'display', { category : category, search_msg: msg(req, 'search', 'Caretakers found', 'Error in searching caretaker'), auth: true });
-				}
-			});
-		}
-	});
-}*/
-
-
 
 
