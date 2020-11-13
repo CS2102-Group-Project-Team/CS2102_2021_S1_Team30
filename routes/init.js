@@ -11,7 +11,7 @@ const flash = require('connect-flash');
 // Postgre SQL Connection
 const { Pool } = require('pg');
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.ELEPHANTSQL_URL ,
   ssl: true
 });
 
