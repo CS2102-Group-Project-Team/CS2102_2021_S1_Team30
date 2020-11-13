@@ -1,10 +1,9 @@
 
 const sql_query = require('../sql');
-const postgres_details = require('../config')
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const multer = require("multer");
-const upload = multer({dest: "../uploads"});
+const upload = multer({dest: "./uploads"});
 const fs = require('fs');
 const flash = require('connect-flash');
 
