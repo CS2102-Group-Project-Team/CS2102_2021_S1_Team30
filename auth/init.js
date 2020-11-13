@@ -1,4 +1,3 @@
-const postgres_details = require('../config')
 const sql_query = require('../sql');
 
 const passport = require('passport');
