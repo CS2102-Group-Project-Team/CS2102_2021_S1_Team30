@@ -32,13 +32,12 @@ $('#calendar').fullCalendar({
   eventSources: [
      {
        events: availabilities,
-       color: '#A8EEC1',
+       color: '#A8EEC1'
      },
      {
        events: bids,
-       textColor: black;
-       color: '#1E90FF',
-
+       textColor: 'black',
+       color: '#1E90FF'
      }],
   eventColor: '#A8EEC1',
   dayClick: function (date, jsEvent, view) {
